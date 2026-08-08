@@ -1,0 +1,331 @@
+/* WAFFLEO POS — Global Styles
+ * Design tokens from Layout.md §7 (Color Palette) and §8 (Typography)
+ * Tailwind CSS v4 with custom theme
+ */
+
+@import "tailwindcss";
+
+/* ============================================================
+   WAFFLEO DESIGN TOKENS (Layout.md §7, §8, §9)
+   ============================================================ */
+
+@theme {
+  /* Color Palette — Layout.md §7 */
+  --color-wfl-orange: #E67E22;
+  --color-wfl-orange-hover: #D35400;
+  --color-wfl-brown: #5D4037;
+  --color-wfl-brown-light: #795548;
+  --color-wfl-cream: #F5E6D3;
+  --color-wfl-cream-dark: #EDD9C4;
+  --color-wfl-offwhite: #FAF8F3;
+  --color-wfl-green: #27AE60;
+  --color-wfl-green-hover: #219A52;
+  --color-wfl-red: #C0392B;
+  --color-wfl-red-hover: #A93226;
+  --color-wfl-amber: #F39C12;
+  --color-wfl-amber-hover: #E08E0B;
+  --color-wfl-text: #2C3E50;
+  --color-wfl-text-secondary: #95A5A6;
+  --color-wfl-border: #ECF0F1;
+  --color-wfl-modal-overlay: rgba(93, 64, 55, 0.5);
+
+  /* Shadows — Layout.md §9 */
+  --shadow-wfl-subtle: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-wfl-card: 0 2px 8px rgba(93, 64, 55, 0.1);
+  --shadow-wfl-emphasized: 0 4px 8px rgba(0, 0, 0, 0.15);
+  --shadow-wfl-hover: 0 6px 16px rgba(93, 64, 55, 0.15);
+
+  /* Typography sizes — Layout.md §8 */
+  --font-size-page-title: 28px;
+  --font-size-section-heading: 20px;
+  --font-size-item-name: 16px;
+  --font-size-body: 14px;
+  --font-size-small: 12px;
+  --font-size-price: 24px;
+  --font-size-button: 16px;
+
+  /* Spacing — Layout.md §9 (8px grid) */
+  --wfl-spacing-xs: 4px;
+  --wfl-spacing-sm: 8px;
+  --wfl-spacing-md: 16px;
+  --wfl-spacing-lg: 24px;
+  --wfl-spacing-xl: 32px;
+  --wfl-spacing-2xl: 48px;
+
+  /* Border radius — Layout.md §9 */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+}
+
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+
+@layer base {
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+  }
+
+  html {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--color-wfl-offwhite);
+    color: var(--color-wfl-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow: hidden; /* Prevent body scroll — app handles its own scrolling */
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  /* Touch target minimum 48x48px — Layout.md §6 */
+  button, [role="button"], a, input, select, textarea {
+    min-height: 48px;
+  }
+
+  input, select, textarea {
+    font-family: inherit;
+  }
+}
+
+/* ============================================================
+   UTILITY CLASSES
+   ============================================================ */
+
+@layer utilities {
+  /* Card style — Layout.md §7 */
+  .wfl-card {
+    background-color: var(--color-wfl-cream);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-wfl-card);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .wfl-card:hover {
+    box-shadow: var(--shadow-wfl-hover);
+    transform: scale(1.02);
+  }
+
+  /* Card without hover transform (for static cards) */
+  .wfl-card-static {
+    background-color: var(--color-wfl-cream);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-wfl-card);
+  }
+
+  /* Modal overlay — Layout.md §7 */
+  .wfl-overlay {
+    background-color: var(--color-wfl-modal-overlay);
+  }
+
+  /* Primary button (orange) */
+  .wfl-btn-primary {
+    background-color: var(--color-wfl-orange);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: var(--wfl-spacing-sm) var(--wfl-spacing-md);
+    font-size: var(--font-size-button);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .wfl-btn-primary:hover {
+    background-color: var(--color-wfl-orange-hover);
+    box-shadow: var(--shadow-wfl-subtle);
+  }
+
+  .wfl-btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Success button (green) */
+  .wfl-btn-success {
+    background-color: var(--color-wfl-green);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: var(--wfl-spacing-sm) var(--wfl-spacing-md);
+    font-size: var(--font-size-button);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .wfl-btn-success:hover {
+    background-color: var(--color-wfl-green-hover);
+  }
+
+  .wfl-btn-success:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  /* Danger button (red) */
+  .wfl-btn-danger {
+    background-color: var(--color-wfl-red);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: var(--wfl-spacing-sm) var(--wfl-spacing-md);
+    font-size: var(--font-size-button);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .wfl-btn-danger:hover {
+    background-color: var(--color-wfl-red-hover);
+  }
+
+  /* Secondary button (cream) */
+  .wfl-btn-secondary {
+    background-color: var(--color-wfl-cream);
+    color: var(--color-wfl-brown);
+    border: 1px solid var(--color-wfl-border);
+    border-radius: var(--radius-sm);
+    padding: var(--wfl-spacing-sm) var(--wfl-spacing-md);
+    font-size: var(--font-size-button);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .wfl-btn-secondary:hover {
+    background-color: var(--color-wfl-cream-dark);
+    border-color: var(--color-wfl-brown-light);
+  }
+
+  /* Status badges — Layout.md §4 */
+  .wfl-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-small);
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .wfl-badge-paid {
+    background-color: rgba(39, 174, 96, 0.15);
+    color: var(--color-wfl-green);
+  }
+
+  .wfl-badge-unpaid {
+    background-color: rgba(192, 57, 43, 0.15);
+    color: var(--color-wfl-red);
+  }
+
+  .wfl-badge-partial {
+    background-color: rgba(243, 156, 18, 0.15);
+    color: var(--color-wfl-amber);
+  }
+
+  .wfl-badge-prepared {
+    background-color: rgba(39, 174, 96, 0.15);
+    color: var(--color-wfl-green);
+  }
+
+  .wfl-badge-cancelled {
+    background-color: rgba(192, 57, 43, 0.15);
+    color: var(--color-wfl-red);
+  }
+
+  .wfl-badge-done {
+    background-color: rgba(39, 174, 96, 0.15);
+    color: var(--color-wfl-green);
+  }
+
+  /* Price display — large, high-contrast */
+  .wfl-price {
+    font-size: var(--font-size-price);
+    font-weight: 700;
+    color: var(--color-wfl-brown);
+    line-height: 1.2;
+  }
+
+  /* Input field */
+  .wfl-input {
+    width: 100%;
+    padding: var(--wfl-spacing-sm) var(--wfl-spacing-md);
+    border: 1px solid var(--color-wfl-border);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-body);
+    background-color: white;
+    color: var(--color-wfl-text);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    min-height: 48px;
+  }
+
+  .wfl-input:focus {
+    outline: none;
+    border-color: var(--color-wfl-orange);
+    box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.15);
+  }
+
+  .wfl-input::placeholder {
+    color: var(--color-wfl-text-secondary);
+  }
+
+  /* Section divider */
+  .wfl-divider {
+    border: none;
+    border-top: 1px solid var(--color-wfl-border);
+    margin: var(--wfl-spacing-md) 0;
+  }
+}
+
+/* ============================================================
+   SCROLLBAR STYLING
+   ============================================================ */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(93, 64, 55, 0.2);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(93, 64, 55, 0.4);
+}
