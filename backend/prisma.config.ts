@@ -7,5 +7,6 @@ export default defineConfig({
 
   datasource: {
     url: process.env.DATABASE_URL ?? 'postgresql://postgres:postgres@localhost:5432/waffleo_pos?schema=public',
+    directUrl: process.env.DIRECT_URL ?? 'postgresql://postgres:postgres@localhost:5432/waffleo_pos?schema=public',
   },
 });
