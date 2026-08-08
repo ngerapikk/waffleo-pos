@@ -4,6 +4,7 @@
 
 import { PrismaClient } from '@prisma/client';
 import { PrismaPg } from '@prisma/adapter-pg';
+import 'dotenv/config';
 import { Pool } from 'pg';
 import * as bcrypt from 'bcryptjs';
 
@@ -22,6 +23,7 @@ async function main() {
   await prisma.orderItemAddon.deleteMany();
   await prisma.payment.deleteMany();
   await prisma.orderItem.deleteMany();
+  await prisma.orderEditLog.deleteMany();
   await prisma.order.deleteMany();
   await prisma.recipe.deleteMany();
   await prisma.inventoryItem.deleteMany();
