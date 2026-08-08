@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "WAFFLEO POS Backend API Server",
   "engines": {
-    "node": "20.x"
+    "node": "22.x"
   },
   "main": "dist/index.js",
   "scripts": {
